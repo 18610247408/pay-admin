@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeHandlers>
+        <typeHandler handler="com.hhm.bussplat.mybatis.typehandlers.ValueEnumTypeHandler" javaType="com.hhm.bussplat.enums.AbleStatus" />
+        <typeHandler handler="com.hhm.bussplat.mybatis.typehandlers.JsonTypeHandler" javaType="com.hhm.bussplat.entity.BussExampleJsonContent"/>
+    </typeHandlers>
+
+    <plugins>
+        <plugin interceptor="com.hhm.bussplat.mybatis.interceptors.BussplatMybatisInterceptor"></plugin>
+    </plugins>
+</configuration>

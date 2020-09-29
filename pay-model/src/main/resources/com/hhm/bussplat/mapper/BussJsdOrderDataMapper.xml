@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.BussJsdOrderDataMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.BussJsdOrderData">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="channel_no" jdbcType="VARCHAR" property="channelNo" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="context" jdbcType="VARCHAR" property="context" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="data_type" jdbcType="VARCHAR" property="dataType" />
+    <result column="retry" jdbcType="INTEGER" property="retry" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, channel_no, order_no, context, status, create_time, last_update_time, 
+    data_type, count_date, retry
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_jsd_order_data
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from buss_jsd_order_data
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.BussJsdOrderData">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_jsd_order_data (optimistic, channel_no, order_no, 
+      context, status, create_time, 
+      last_update_time, data_type, count_date, retry
+      )
+    values (0, #{channelNo,jdbcType=VARCHAR}, #{orderNo,jdbcType=VARCHAR}, 
+      #{context,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdateTime,jdbcType=TIMESTAMP}, #{dataType,jdbcType=VARCHAR}, #{countDate,jdbcType=VARCHAR},
+      #{retry,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.BussJsdOrderData">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_jsd_order_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        optimistic,
+      <if test="channelNo != null">
+        channel_no,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="context != null">
+        context,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+      <if test="dataType != null">
+        data_type,
+      </if>
+      <if test="countDate != null">
+        count_date,
+      </if>
+      <if test="retry != null">
+        retry,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        0,
+      <if test="channelNo != null">
+        #{channelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null">
+        #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataType != null">
+        #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="countDate != null">
+        #{countDate,jdbcType=VARCHAR},
+      </if>
+      <if test="retry != null">
+         #{retry,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.BussJsdOrderData">
+    update buss_jsd_order_data
+    <set>
+        optimistic = optimistic + 1,
+      <if test="channelNo != null">
+        channel_no = #{channelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="context != null">
+        context = #{context,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dataType != null">
+        data_type = #{dataType,jdbcType=VARCHAR},
+      </if>
+      <if test="countDate != null">
+        count_date = #{countDate,jdbcType=VARCHAR},
+      </if>
+      <if test="retry != null">
+         retry = #{retry,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.BussJsdOrderData">
+    update buss_jsd_order_data
+    set optimistic = optimistic + 1,
+      channel_no = #{channelNo,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      context = #{context,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      data_type = #{dataType,jdbcType=VARCHAR},
+      count_date = #{countDate,jdbcType=VARCHAR},
+      retry = #{retry,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findByOrderNo" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_jsd_order_data
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+    and channel_no = #{channelNo,jdbcType=VARCHAR}
+  </select>
+  <select id="findAllNotPushedOrder" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_jsd_order_data
+    where 1=1 
+    and channel_no = #{channelNo,jdbcType=VARCHAR}
+    and status = 'INIT'
+    and retry <![CDATA[ < ]]> 6
+    limit 200
+  </select>
+  
+  
+  
+  
+</mapper>

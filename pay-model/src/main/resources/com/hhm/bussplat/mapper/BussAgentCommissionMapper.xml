@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.BussAgentCommissionMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.BussAgentCommission">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="flow_no" jdbcType="VARCHAR" property="flowNo" />
+    <result column="source_order_no" jdbcType="VARCHAR" property="sourceOrderNo" />
+    <result column="channel_no" jdbcType="VARCHAR" property="channelNo" />
+    <result column="cost_no" jdbcType="VARCHAR" property="costNo" />
+    <result column="agent_no" jdbcType="VARCHAR" property="agentNo" />
+    <result column="agent_income" jdbcType="DECIMAL" property="agentIncome" />
+    <result column="agent_income_send_status" jdbcType="VARCHAR" property="agentIncomeSendStatus" />
+    <result column="agent_income_send_time" jdbcType="TIMESTAMP" property="agentIncomeSendTime" />
+    <result column="agent_income_send_remark" jdbcType="VARCHAR" property="agentIncomeSendRemark" />
+    <result column="user_no" jdbcType="VARCHAR" property="userNo" />
+    <result column="user_income" jdbcType="DECIMAL" property="userIncome" />
+    <result column="platform_income" jdbcType="DECIMAL" property="platformIncome" />
+    <result column="able_status" jdbcType="INTEGER" property="ableStatus" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, flow_no, source_order_no, channel_no, cost_no, agent_no, agent_income, 
+    agent_income_send_status, agent_income_send_time, agent_income_send_remark, user_no, 
+    user_income, platform_income, able_status, remark, create_time, update_time
+  </sql>
+  <select id="findList" resultMap="BaseResultMap" parameterType="com.hhm.bussplat.entity.BussAgentCommission">
+    select <include refid="Base_Column_List"/>
+    from buss_agent_commission
+    where 1=1
+    <if test="flowNo != null">
+      and flow_no = #{flowNo,jdbcType=VARCHAR}
+    </if>
+    <if test="sourceOrderNo != null">
+      and source_order_no = #{sourceOrderNo,jdbcType=VARCHAR}
+    </if>
+    <if test="channelNo != null">
+      and channel_no = #{channelNo,jdbcType=VARCHAR}
+    </if>
+    <if test="costNo != null">
+      and cost_no = #{costNo,jdbcType=VARCHAR}
+    </if>
+    <if test="agentNo != null">
+      and agent_no = #{agentNo,jdbcType=VARCHAR}
+    </if>
+    <if test="agentIncomeSendStatus != null">
+      and agent_income_send_status = #{agentIncomeSendStatus,jdbcType=VARCHAR}
+    </if>
+    <if test="userNo != null">
+      and user_no = #{userNo,jdbcType=VARCHAR}
+    </if>
+    <if test="ableStatus != null">
+      and able_status = #{ableStatus,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_agent_commission
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from buss_agent_commission
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.BussAgentCommission">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_agent_commission (optimistic, flow_no, source_order_no, 
+      channel_no, cost_no, agent_no, 
+      agent_income, agent_income_send_status, agent_income_send_time, 
+      agent_income_send_remark, user_no, user_income, 
+      platform_income, able_status, remark, 
+      create_time, update_time)
+    values (#{optimistic,jdbcType=INTEGER}, #{flowNo,jdbcType=VARCHAR}, #{sourceOrderNo,jdbcType=VARCHAR}, 
+      #{channelNo,jdbcType=VARCHAR}, #{costNo,jdbcType=VARCHAR}, #{agentNo,jdbcType=VARCHAR}, 
+      #{agentIncome,jdbcType=DECIMAL}, #{agentIncomeSendStatus,jdbcType=VARCHAR}, #{agentIncomeSendTime,jdbcType=TIMESTAMP}, 
+      #{agentIncomeSendRemark,jdbcType=VARCHAR}, #{userNo,jdbcType=VARCHAR}, #{userIncome,jdbcType=DECIMAL}, 
+      #{platformIncome,jdbcType=DECIMAL}, #{ableStatus,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.BussAgentCommission">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_agent_commission
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        optimistic,
+      </if>
+      <if test="flowNo != null">
+        flow_no,
+      </if>
+      <if test="sourceOrderNo != null">
+        source_order_no,
+      </if>
+      <if test="channelNo != null">
+        channel_no,
+      </if>
+      <if test="costNo != null">
+        cost_no,
+      </if>
+      <if test="agentNo != null">
+        agent_no,
+      </if>
+      <if test="agentIncome != null">
+        agent_income,
+      </if>
+      <if test="agentIncomeSendStatus != null">
+        agent_income_send_status,
+      </if>
+      <if test="agentIncomeSendTime != null">
+        agent_income_send_time,
+      </if>
+      <if test="agentIncomeSendRemark != null">
+        agent_income_send_remark,
+      </if>
+      <if test="userNo != null">
+        user_no,
+      </if>
+      <if test="userIncome != null">
+        user_income,
+      </if>
+      <if test="platformIncome != null">
+        platform_income,
+      </if>
+      <if test="ableStatus != null">
+        able_status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="flowNo != null">
+        #{flowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceOrderNo != null">
+        #{sourceOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelNo != null">
+        #{channelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="costNo != null">
+        #{costNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNo != null">
+        #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentIncome != null">
+        #{agentIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="agentIncomeSendStatus != null">
+        #{agentIncomeSendStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="agentIncomeSendTime != null">
+        #{agentIncomeSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agentIncomeSendRemark != null">
+        #{agentIncomeSendRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userNo != null">
+        #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userIncome != null">
+        #{userIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="platformIncome != null">
+        #{platformIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="ableStatus != null">
+        #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.BussAgentCommission">
+    update buss_agent_commission
+    <set>
+      <if test="optimistic != null">
+        optimistic = #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="flowNo != null">
+        flow_no = #{flowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceOrderNo != null">
+        source_order_no = #{sourceOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelNo != null">
+        channel_no = #{channelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="costNo != null">
+        cost_no = #{costNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNo != null">
+        agent_no = #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentIncome != null">
+        agent_income = #{agentIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="agentIncomeSendStatus != null">
+        agent_income_send_status = #{agentIncomeSendStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="agentIncomeSendTime != null">
+        agent_income_send_time = #{agentIncomeSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agentIncomeSendRemark != null">
+        agent_income_send_remark = #{agentIncomeSendRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="userNo != null">
+        user_no = #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userIncome != null">
+        user_income = #{userIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="platformIncome != null">
+        platform_income = #{platformIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="ableStatus != null">
+        able_status = #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.BussAgentCommission">
+    update buss_agent_commission
+    set optimistic = #{optimistic,jdbcType=INTEGER},
+      flow_no = #{flowNo,jdbcType=VARCHAR},
+      source_order_no = #{sourceOrderNo,jdbcType=VARCHAR},
+      channel_no = #{channelNo,jdbcType=VARCHAR},
+      cost_no = #{costNo,jdbcType=VARCHAR},
+      agent_no = #{agentNo,jdbcType=VARCHAR},
+      agent_income = #{agentIncome,jdbcType=DECIMAL},
+      agent_income_send_status = #{agentIncomeSendStatus,jdbcType=VARCHAR},
+      agent_income_send_time = #{agentIncomeSendTime,jdbcType=TIMESTAMP},
+      agent_income_send_remark = #{agentIncomeSendRemark,jdbcType=VARCHAR},
+      user_no = #{userNo,jdbcType=VARCHAR},
+      user_income = #{userIncome,jdbcType=DECIMAL},
+      platform_income = #{platformIncome,jdbcType=DECIMAL},
+      able_status = #{ableStatus,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.AgentMenuMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.AgentMenu">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="levels" jdbcType="VARCHAR" property="levels" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="res_type" jdbcType="VARCHAR" property="resType" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="is_leaf" jdbcType="VARCHAR" property="isLeaf" />
+    <result column="display_order" jdbcType="BIGINT" property="displayOrder" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, name, levels, status, url, res_type, parent_id, label, icon, is_leaf, 
+    display_order, remark, operator, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from agent_menu
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from agent_menu
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.AgentMenu">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into agent_menu (optimistic, name, levels, 
+      status, url, res_type, 
+      parent_id, label, icon, 
+      is_leaf, display_order, remark, 
+      operator, create_time)
+    values (#{optimistic,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{levels,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{resType,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=BIGINT}, #{label,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+      #{isLeaf,jdbcType=VARCHAR}, #{displayOrder,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.AgentMenu">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into agent_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        optimistic,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="levels != null">
+        levels,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="resType != null">
+        res_type,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="label != null">
+        label,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="isLeaf != null">
+        is_leaf,
+      </if>
+      <if test="displayOrder != null">
+        display_order,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="levels != null">
+        #{levels,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null">
+        #{resType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeaf != null">
+        #{isLeaf,jdbcType=VARCHAR},
+      </if>
+      <if test="displayOrder != null">
+        #{displayOrder,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.AgentMenu">
+    update agent_menu
+    <set>
+      <if test="optimistic != null">
+        optimistic = #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="levels != null">
+        levels = #{levels,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="resType != null">
+        res_type = #{resType,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="label != null">
+        label = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="isLeaf != null">
+        is_leaf = #{isLeaf,jdbcType=VARCHAR},
+      </if>
+      <if test="displayOrder != null">
+        display_order = #{displayOrder,jdbcType=BIGINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.AgentMenu">
+    update agent_menu
+    set optimistic = #{optimistic,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      levels = #{levels,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      res_type = #{resType,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      label = #{label,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      is_leaf = #{isLeaf,jdbcType=VARCHAR},
+      display_order = #{displayOrder,jdbcType=BIGINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="allMenus" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM agent_menu
+    WHERE 1=1
+    <if test="query.id != null">
+      AND id = #{query.id}
+    </if>
+    <if test="query.resType != null and query.resType != ''">
+      AND res_type = #{query.resType}
+    </if>
+    <if test="query.levels != null and query.levels != ''">
+      AND levels = #{query.levels}
+    </if>
+    <if test="query.status != null and query.status != ''">
+      AND status = #{query.status}
+    </if>
+  </select>
+
+  <select id="findAllMenus" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM agent_menu
+    WHERE 1=1
+    <if test="query.name != null and query.name != ''">
+    AND  name like '%${query.name}%'
+    </if>
+    <if test="query.resType != null and query.resType != ''">
+    AND  res_type = #{query.resType}
+    </if>
+    <if test="query.levels != null and query.levels != ''">
+    AND levels = #{query.levels}
+    </if>
+    order by create_time desc
+  </select>
+
+  <select id="leafMenusOfOperatorAndParent" resultMap="BaseResultMap">
+    SELECT pm.*
+    FROM agent_operator_role por
+    LEFT JOIN agent_role_menu prm ON por.role_id = prm.role_id
+    LEFT JOIN agent_menu pm ON prm.menu_id = pm.id
+    WHERE por.operator_id = #{operator,jdbcType=BIGINT}
+    AND pm.parent_id = #{parentId,jdbcType=BIGINT}
+    AND pm.`status` = 'TRUE'
+  </select>
+
+  <select id="firstMenusOfOperator" resultMap="BaseResultMap">
+    SELECT pm.*
+    FROM agent_operator_role por
+    LEFT JOIN agent_role_menu prm ON por.ROLE_ID = prm.ROLE_ID
+    LEFT JOIN agent_menu pm ON prm.MENU_ID = pm.ID
+    WHERE por.OPERATOR_ID = #{operator,jdbcType=BIGINT}
+    AND pm.`status` = 'TRUE'
+    AND pm.is_leaf = 'N'
+  </select>
+
+  <select id="allMenusOfOperator" resultMap="BaseResultMap">
+    SELECT pm.*
+    FROM agent_operator_role por
+    LEFT JOIN agent_role_menu prm ON por.role_id = prm.role_id
+    LEFT JOIN agent_menu pm ON prm.menu_id = pm.id
+    WHERE por.operator_id = #{operator,jdbcType=BIGINT}
+    AND pm.`status` = 'TRUE'
+  </select>
+
+  <select id="allMenusOfRole" resultMap="BaseResultMap">
+    SELECT pm.*
+    FROM  agent_role_menu prm
+    LEFT JOIN agent_menu pm ON prm.menu_id = pm.id
+    WHERE prm.role_id = #{roleId,jdbcType=BIGINT}
+    AND pm.`status` = 'TRUE'
+  </select>
+</mapper>

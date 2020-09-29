@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.AgentRoleMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.AgentRole">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="role_code" jdbcType="VARCHAR" property="roleCode" />
+    <result column="role_type" jdbcType="VARCHAR" property="roleType" />
+    <result column="allocation_type" jdbcType="VARCHAR" property="allocationType" />
+    <result column="child_visible" jdbcType="VARCHAR" property="childVisible" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, name, status, remark, role_code, role_type, allocation_type, child_visible
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from agent_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from agent_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.AgentRole">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into agent_role (optimistic, name, status, 
+      remark, role_code, role_type, 
+      allocation_type, child_visible)
+    values (#{optimistic,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, #{roleType,jdbcType=VARCHAR}, 
+      #{allocationType,jdbcType=VARCHAR}, #{childVisible,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.AgentRole">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into agent_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        optimistic,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="roleCode != null">
+        role_code,
+      </if>
+      <if test="roleType != null">
+        role_type,
+      </if>
+      <if test="allocationType != null">
+        allocation_type,
+      </if>
+      <if test="childVisible != null">
+        child_visible,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null">
+        #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="allocationType != null">
+        #{allocationType,jdbcType=VARCHAR},
+      </if>
+      <if test="childVisible != null">
+        #{childVisible,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.AgentRole">
+    update agent_role
+    <set>
+      <if test="optimistic != null">
+        optimistic = #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        role_code = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleType != null">
+        role_type = #{roleType,jdbcType=VARCHAR},
+      </if>
+      <if test="allocationType != null">
+        allocation_type = #{allocationType,jdbcType=VARCHAR},
+      </if>
+      <if test="childVisible != null">
+        child_visible = #{childVisible,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.AgentRole">
+    update agent_role
+    set optimistic = #{optimistic,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      role_code = #{roleCode,jdbcType=VARCHAR},
+      role_type = #{roleType,jdbcType=VARCHAR},
+      allocation_type = #{allocationType,jdbcType=VARCHAR},
+      child_visible = #{childVisible,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="checkOnlyOnlyOne" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM agent_role
+    WHERE name = #{name}
+    OR role_code = #{roleCode}
+  </select>
+
+  <select id="findAllRolesOfPage" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM agent_role
+    WHERE 1=1
+    <if test="query.name != null and query.name != ''">
+      AND name = #{query.name}
+    </if>
+    <if test="query.roleCode != null and query.roleCode != ''">
+      AND role_code = #{query.roleCode}
+    </if>
+  </select>
+
+  <select id="allRoles" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM agent_role
+    WHERE 1=1
+    <if test="query.name != null and query.name != ''">
+      AND name = #{query.name}
+    </if>
+    <if test="query.roleCode != null and query.roleCode != ''">
+      AND role_code = #{query.roleCode}
+    </if>
+    <if test="query.status != null and query.status != ''">
+      AND status = #{query.status}
+    </if>
+  </select>
+
+  <select id="findOperatorRoles" resultMap="BaseResultMap">
+    SELECT pr.*
+    FROM agent_operator_role por
+    LEFT JOIN agent_role pr
+    ON por.role_id = pr.id
+    WHERE por.operator_id = #{operatorId,jdbcType=BIGINT}
+    AND pr.status = 'TRUE'
+  </select>
+</mapper>

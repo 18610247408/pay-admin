@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.BussCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.BussCategory">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="channel_no" jdbcType="VARCHAR" property="channelNo" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="category_no" jdbcType="VARCHAR" property="categoryNo" />
+    <result column="parent_category_no" jdbcType="VARCHAR" property="parentCategoryNo" />
+    <result column="able_status" jdbcType="INTEGER" property="ableStatus" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, channel_no, category_name, category_no, parent_category_no, able_status, 
+    remark, operator, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_category
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from buss_category
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.BussCategory">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_category (optimistic, channel_no, category_name, 
+      category_no, parent_category_no, able_status, 
+      remark, operator, create_time, 
+      update_time)
+    values (#{optimistic,jdbcType=INTEGER}, #{channelNo,jdbcType=VARCHAR}, #{categoryName,jdbcType=VARCHAR}, 
+      #{categoryNo,jdbcType=VARCHAR}, #{parentCategoryNo,jdbcType=VARCHAR}, #{ableStatus,jdbcType=INTEGER},
+      #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.BussCategory">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        optimistic,
+      </if>
+      <if test="channelNo != null">
+        channel_no,
+      </if>
+      <if test="categoryName != null">
+        category_name,
+      </if>
+      <if test="categoryNo != null">
+        category_no,
+      </if>
+      <if test="parentCategoryNo != null">
+        parent_category_no,
+      </if>
+      <if test="ableStatus != null">
+        able_status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="channelNo != null">
+        #{channelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null">
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryNo != null">
+        #{categoryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCategoryNo != null">
+        #{parentCategoryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ableStatus != null">
+        #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.BussCategory">
+    update buss_category
+    <set>
+      <if test="optimistic != null">
+        optimistic = #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="channelNo != null">
+        channel_no = #{channelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryName != null">
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryNo != null">
+        category_no = #{categoryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="parentCategoryNo != null">
+        parent_category_no = #{parentCategoryNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ableStatus != null">
+        able_status = #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.BussCategory">
+    update buss_category
+    set optimistic = #{optimistic,jdbcType=INTEGER},
+      channel_no = #{channelNo,jdbcType=VARCHAR},
+      category_name = #{categoryName,jdbcType=VARCHAR},
+      category_no = #{categoryNo,jdbcType=VARCHAR},
+      parent_category_no = #{parentCategoryNo,jdbcType=VARCHAR},
+      able_status = #{ableStatus,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

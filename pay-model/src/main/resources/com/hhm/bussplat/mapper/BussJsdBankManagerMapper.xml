@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.BussJsdBankManagerMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.BussJsdBankManager">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="cid" jdbcType="VARCHAR" property="cid" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="able_status" jdbcType="INTEGER" property="ableStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, cid,cname, able_status, create_time, update_time, remark
+  </sql>
+
+  <resultMap id="JoinResultMap" type="com.hhm.bussplat.entity.BussJsdBankManager">
+     <id column="buss_jsd_bank_manager_id" jdbcType="INTEGER" property="id" />
+    <result column="buss_jsd_bank_manager_optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="buss_jsd_bank_manager_cid" jdbcType="VARCHAR" property="cid" />
+    <result column="buss_jsd_bank_manager_cname" jdbcType="VARCHAR" property="cname" />
+    <result column="buss_jsd_bank_manager_able_status" jdbcType="INTEGER" property="ableStatus" />
+    <result column="buss_jsd_bank_manager_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="buss_jsd_bank_manager_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="buss_jsd_bank_manager_remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+  <sql id="Join_Column_List">
+    ${tableName}.id `buss_jsd_bank_manager_id`,
+    ${tableName}.optimistic `buss_jsd_bank_manager_optimistic`,
+    ${tableName}.cid `buss_jsd_bank_manager_cid`,
+    ${tableName}.cname `buss_jsd_bank_manager_cname`,
+    ${tableName}.able_status `buss_jsd_bank_manager_able_status`,
+    ${tableName}.create_time `buss_jsd_bank_manager_create_time`,
+    ${tableName}.update_time `buss_jsd_bank_manager_update_time`,
+    ${tableName}.remark `buss_jsd_bank_manager_remark`
+    ${end}
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_jsd_bank_manager
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from buss_jsd_bank_manager
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="batchInsert" parameterType="com.hhm.bussplat.entity.BussJsdBankManager" useGeneratedKeys="true">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_jsd_bank_manager (optimistic, cid,cname, able_status,
+      create_time, update_time, remark
+      )
+    values
+     <foreach collection="list" item="emp" separator=",">
+        (#{emp.optimistic,jdbcType=INTEGER}, #{emp.cid,jdbcType=VARCHAR},#{emp.cname,jdbcType=VARCHAR}, #{emp.ableStatus,jdbcType=INTEGER},
+      #{emp.createTime,jdbcType=TIMESTAMP}, #{emp.updateTime,jdbcType=TIMESTAMP}, #{emp.remark,jdbcType=VARCHAR}
+      )
+    </foreach>
+  </insert>
+
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.BussJsdBankManager">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_jsd_bank_manager (optimistic, cid,cname, able_status,
+      create_time, update_time, remark
+      )
+    values (#{optimistic,jdbcType=INTEGER}, #{cid,jdbcType=VARCHAR},#{cname,jdbcType=VARCHAR}, #{ableStatus,jdbcType=INTEGER},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.BussJsdBankManager">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_jsd_bank_manager
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        optimistic,
+      </if>
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="cname != null">
+        cname,
+      </if>
+      <if test="ableStatus != null">
+        able_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null">
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="ableStatus != null">
+        #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.BussJsdBankManager">
+    update buss_jsd_bank_manager
+    <set>
+      <if test="optimistic != null">
+        optimistic = #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="cid != null">
+        cid = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="cname != null">
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="ableStatus != null">
+        able_status = #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.BussJsdBankManager">
+    update buss_jsd_bank_manager
+    set optimistic = #{optimistic,jdbcType=INTEGER},
+      cid = #{cid,jdbcType=VARCHAR},
+      cname = #{cname,jdbcType=VARCHAR},
+      able_status = #{ableStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="findListOfCids" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List"/>
+    from buss_jsd_bank_manager
+    where 1 = 1
+    <if test="list != null and list.size() != 0">
+        and cid in
+        <foreach collection="list" item="tmp" open="(" close=")" separator=",">
+          #{tmp,jdbcType=VARCHAR}
+        </foreach>
+    </if>
+  </select>
+</mapper>

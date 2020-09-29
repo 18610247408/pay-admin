@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.AgentOperatorRoleMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.AgentOperatorRole">
+    <result column="operator_id" jdbcType="BIGINT" property="operatorId" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.AgentOperatorRole">
+    insert into agent_operator_role (operator_id, role_id, creator, 
+      create_time)
+    values (#{operatorId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{creator,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.AgentOperatorRole">
+    insert into agent_operator_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteByOperator" parameterType="java.lang.Long">
+  	 DELETE FROM agent_operator_role
+  	 WHERE operator_id = #{operatorId,jdbcType=BIGINT}
+  </delete>
+</mapper>

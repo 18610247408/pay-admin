@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.BussAgentAccountBillMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.BussAgentAccountBill">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="account_no" jdbcType="VARCHAR" property="accountNo" />
+    <result column="agent_no" jdbcType="VARCHAR" property="agentNo" />
+    <result column="source_comm_flow_no" jdbcType="VARCHAR" property="sourceCommFlowNo" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
+    <result column="operate_type" jdbcType="VARCHAR" property="operateType" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="fail_reason" jdbcType="VARCHAR" property="failReason" />
+    <result column="count_date" jdbcType="DATE" property="countDate" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="acc_desc" jdbcType="VARCHAR" property="accDesc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, account_no, agent_no, source_comm_flow_no, amount, operate_type, 
+    status, fail_reason, count_date, create_time, update_time, acc_desc
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_agent_account_bill
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from buss_agent_account_bill
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.BussAgentAccountBill">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_agent_account_bill (optimistic, account_no, agent_no, 
+      source_comm_flow_no, amount, operate_type, 
+      status, fail_reason, count_date, 
+      create_time, update_time, acc_desc
+      )
+    values (0, #{accountNo,jdbcType=VARCHAR}, #{agentNo,jdbcType=VARCHAR}, 
+      #{sourceCommFlowNo,jdbcType=VARCHAR}, #{amount,jdbcType=DOUBLE}, #{operateType,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{failReason,jdbcType=VARCHAR}, #{countDate,jdbcType=DATE}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{accDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.BussAgentAccountBill">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_agent_account_bill
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        optimistic,
+      <if test="accountNo != null">
+        account_no,
+      </if>
+      <if test="agentNo != null">
+        agent_no,
+      </if>
+      <if test="sourceCommFlowNo != null">
+        source_comm_flow_no,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="operateType != null">
+        operate_type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="failReason != null">
+        fail_reason,
+      </if>
+      <if test="countDate != null">
+        count_date,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="accDesc != null">
+        acc_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+        0,
+      <if test="accountNo != null">
+        #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNo != null">
+        #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceCommFlowNo != null">
+        #{sourceCommFlowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="operateType != null">
+        #{operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="failReason != null">
+        #{failReason,jdbcType=VARCHAR},
+      </if>
+      <if test="countDate != null">
+        #{countDate,jdbcType=DATE},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accDesc != null">
+        #{accDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.BussAgentAccountBill">
+    update buss_agent_account_bill
+    <set>
+        optimistic = optimistic + 1,
+      <if test="accountNo != null">
+        account_no = #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNo != null">
+        agent_no = #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceCommFlowNo != null">
+        source_comm_flow_no = #{sourceCommFlowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DOUBLE},
+      </if>
+      <if test="operateType != null">
+        operate_type = #{operateType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="failReason != null">
+        fail_reason = #{failReason,jdbcType=VARCHAR},
+      </if>
+      <if test="countDate != null">
+        count_date = #{countDate,jdbcType=DATE},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accDesc != null">
+        acc_desc = #{accDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.BussAgentAccountBill">
+    update buss_agent_account_bill
+    set optimistic = optimistic + 1,
+      account_no = #{accountNo,jdbcType=VARCHAR},
+      agent_no = #{agentNo,jdbcType=VARCHAR},
+      source_comm_flow_no = #{sourceCommFlowNo,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DOUBLE},
+      operate_type = #{operateType,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      fail_reason = #{failReason,jdbcType=VARCHAR},
+      count_date = #{countDate,jdbcType=DATE},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      acc_desc = #{accDesc,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

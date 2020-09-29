@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.AgentChannelCostMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.AgentChannelCost">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="cost_no" jdbcType="VARCHAR" property="costNo" />
+    <result column="channel_no" jdbcType="VARCHAR" property="channelNo" />
+    <result column="agent_no" jdbcType="VARCHAR" property="agentNo" />
+    <result column="agent_level" jdbcType="INTEGER" property="agentLevel" />
+    <result column="settle_cost_proportion" jdbcType="DECIMAL" property="settleCostProportion" />
+    <result column="sale_cost_proportion" jdbcType="DECIMAL" property="saleCostProportion" />
+    <result column="effective_time" jdbcType="TIMESTAMP" property="effectiveTime" />
+    <result column="expired_time" jdbcType="TIMESTAMP" property="expiredTime" />
+    <result column="able_status" jdbcType="INTEGER" property="ableStatus" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, cost_no, channel_no,agent_no, agent_level, settle_cost_proportion,
+    sale_cost_proportion, effective_time, expired_time, able_status, remark, operator, 
+    create_time, update_time
+  </sql>
+
+  <select id="effectiveChannelCost" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from agent_channel_cost
+    where channel_no = #{query.channelNo,jdbcType=VARCHAR}
+    and agent_no = #{query.agentNo,jdbcType=VARCHAR}
+    and agent_level = #{query.agentLevel,jdbcType=INTEGER}
+    and able_status = #{query.ableStatus,jdbcType=INTEGER}
+    and effective_time <![CDATA[ <= ]]>  #{time,jdbcType=TIMESTAMP}
+    and #{time,jdbcType=TIMESTAMP} <![CDATA[ < ]]> expired_time
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from agent_channel_cost
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from agent_channel_cost
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.AgentChannelCost">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into agent_channel_cost (optimistic, cost_no, channel_no,
+      agent_no,agent_level, settle_cost_proportion,
+      sale_cost_proportion, effective_time, expired_time, 
+      able_status, remark, operator, 
+      create_time, update_time)
+    values (#{optimistic,jdbcType=INTEGER}, #{costNo,jdbcType=VARCHAR}, #{channelNo,jdbcType=VARCHAR},
+      #{agentNo,jdbcType=VARCHAR}, #{agentLevel,jdbcType=INTEGER}, #{settleCostProportion,jdbcType=DECIMAL},
+      #{saleCostProportion,jdbcType=DECIMAL}, #{effectiveTime,jdbcType=TIMESTAMP}, #{expiredTime,jdbcType=TIMESTAMP}, 
+      #{ableStatus,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{operator,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.AgentChannelCost">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into agent_channel_cost
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        optimistic,
+      </if>
+      <if test="costNo != null">
+        cost_no,
+      </if>
+      <if test="channelNo != null">
+        channel_no,
+      </if>
+      <if test="agentNo != null">
+        agent_no,
+      </if>
+      <if test="agentLevel != null">
+        agent_level,
+      </if>
+      <if test="settleCostProportion != null">
+        settle_cost_proportion,
+      </if>
+      <if test="saleCostProportion != null">
+        sale_cost_proportion,
+      </if>
+      <if test="effectiveTime != null">
+        effective_time,
+      </if>
+      <if test="expiredTime != null">
+        expired_time,
+      </if>
+      <if test="ableStatus != null">
+        able_status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operator != null">
+        operator,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="costNo != null">
+        #{costNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelNo != null">
+        #{channelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNo != null">
+        #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentLevel != null">
+        #{agentLevel,jdbcType=INTEGER},
+      </if>
+      <if test="settleCostProportion != null">
+        #{settleCostProportion,jdbcType=DECIMAL},
+      </if>
+      <if test="saleCostProportion != null">
+        #{saleCostProportion,jdbcType=DECIMAL},
+      </if>
+      <if test="effectiveTime != null">
+        #{effectiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expiredTime != null">
+        #{expiredTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ableStatus != null">
+        #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.AgentChannelCost">
+    update agent_channel_cost
+    <set>
+      <if test="optimistic != null">
+        optimistic = #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="costNo != null">
+        cost_no = #{costNo,jdbcType=VARCHAR},
+      </if>
+      <if test="channelNo != null">
+        channel_no = #{channelNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentNo != null">
+        agent_no = #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="agentLevel != null">
+        agent_level = #{agentLevel,jdbcType=INTEGER},
+      </if>
+      <if test="settleCostProportion != null">
+        settle_cost_proportion = #{settleCostProportion,jdbcType=DECIMAL},
+      </if>
+      <if test="saleCostProportion != null">
+        sale_cost_proportion = #{saleCostProportion,jdbcType=DECIMAL},
+      </if>
+      <if test="effectiveTime != null">
+        effective_time = #{effectiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expiredTime != null">
+        expired_time = #{expiredTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ableStatus != null">
+        able_status = #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.AgentChannelCost">
+    update agent_channel_cost
+    set optimistic = #{optimistic,jdbcType=INTEGER},
+      cost_no = #{costNo,jdbcType=VARCHAR},
+      channel_no = #{channelNo,jdbcType=VARCHAR},
+      agent_no = #{agentNo,jdbcType=VARCHAR},
+      agent_level = #{agentLevel,jdbcType=INTEGER},
+      settle_cost_proportion = #{settleCostProportion,jdbcType=DECIMAL},
+      sale_cost_proportion = #{saleCostProportion,jdbcType=DECIMAL},
+      effective_time = #{effectiveTime,jdbcType=TIMESTAMP},
+      expired_time = #{expiredTime,jdbcType=TIMESTAMP},
+      able_status = #{ableStatus,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      operator = #{operator,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="find" resultMap="BaseResultMap" parameterType="com.hhm.bussplat.entity.AgentChannelCost">
+    select <include refid="Base_Column_List"/>
+    from agent_channel_cost
+    where 1=1
+    <if test="id != null">
+        and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="costNo != null">
+        and cost_no = #{costNo,jdbcType=VARCHAR}
+    </if>
+    <if test="channelNo != null">
+        and channel_no = #{channelNo,jdbcType=VARCHAR}
+    </if>
+    <if test="agentNo != null">
+        and agent_no = #{agentNo,jdbcType=VARCHAR}
+    </if>
+    <if test="agentLevel != null">
+        and agent_level = #{agentLevel,jdbcType=INTEGER}
+    </if>
+    <if test="settleCostProportion != null">
+        and settle_cost_proportion = #{settleCostProportion,jdbcType=DECIMAL}
+    </if>
+    <if test="saleCostProportion != null">
+        and sale_cost_proportion = #{saleCostProportion,jdbcType=DECIMAL}
+    </if>
+    <if test="ableStatus != null">
+        and able_status = #{ableStatus,jdbcType=INTEGER}
+    </if>
+  </select>
+</mapper>

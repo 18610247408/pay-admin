@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.BussJsdOrderSubmitLogMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.BussJsdOrderSubmitLog">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="agent_no" jdbcType="VARCHAR" property="agentNo" />
+    <result column="sale_no" jdbcType="VARCHAR" property="saleNo" />
+    <result column="bank_id" jdbcType="VARCHAR" property="bankId" />
+    <result column="item_id" jdbcType="VARCHAR" property="itemId" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="params" jdbcType="VARCHAR" property="params" />
+    <result column="result_status" jdbcType="INTEGER" property="resultStatus" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="handle_jifen_orde_status" jdbcType="VARCHAR" property="handleJifenOrdeStatus" />
+    <result column="handle_jifen_orde_time" jdbcType="TIMESTAMP" property="handleJifenOrdeTime" />
+    <result column="jifen_order_batch_no" jdbcType="VARCHAR" property="jifenOrderBatchNo" />
+    <result column="able_status" jdbcType="INTEGER" property="ableStatus" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, agent_no, sale_no, bank_id, item_id, product_id, params, result_status, 
+    result, handle_jifen_orde_status, handle_jifen_orde_time, jifen_order_batch_no, able_status, 
+    remark, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_jsd_order_submit_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from buss_jsd_order_submit_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.BussJsdOrderSubmitLog">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_jsd_order_submit_log (optimistic, agent_no, sale_no, 
+      bank_id, item_id, product_id, 
+      params, result_status, result, 
+      handle_jifen_orde_status, handle_jifen_orde_time, 
+      jifen_order_batch_no, able_status, remark, 
+      create_time, update_time)
+    values (#{optimistic,jdbcType=INTEGER}, #{agentNo,jdbcType=VARCHAR}, #{saleNo,jdbcType=VARCHAR}, 
+      #{bankId,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
+      #{params,jdbcType=VARCHAR}, #{resultStatus,jdbcType=INTEGER}, #{result,jdbcType=VARCHAR}, 
+      #{handleJifenOrdeStatus,jdbcType=VARCHAR}, #{handleJifenOrdeTime,jdbcType=TIMESTAMP}, 
+      #{jifenOrderBatchNo,jdbcType=VARCHAR}, #{ableStatus,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.BussJsdOrderSubmitLog">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_jsd_order_submit_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        optimistic,
+      </if>
+      <if test="agentNo != null">
+        agent_no,
+      </if>
+      <if test="saleNo != null">
+        sale_no,
+      </if>
+      <if test="bankId != null">
+        bank_id,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="params != null">
+        params,
+      </if>
+      <if test="resultStatus != null">
+        result_status,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="handleJifenOrdeStatus != null">
+        handle_jifen_orde_status,
+      </if>
+      <if test="handleJifenOrdeTime != null">
+        handle_jifen_orde_time,
+      </if>
+      <if test="jifenOrderBatchNo != null">
+        jifen_order_batch_no,
+      </if>
+      <if test="ableStatus != null">
+        able_status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="agentNo != null">
+        #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="saleNo != null">
+        #{saleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null">
+        #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="resultStatus != null">
+        #{resultStatus,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="handleJifenOrdeStatus != null">
+        #{handleJifenOrdeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="handleJifenOrdeTime != null">
+        #{handleJifenOrdeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jifenOrderBatchNo != null">
+        #{jifenOrderBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ableStatus != null">
+        #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.BussJsdOrderSubmitLog">
+    update buss_jsd_order_submit_log
+    <set>
+      <if test="optimistic != null">
+        optimistic = #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="agentNo != null">
+        agent_no = #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="saleNo != null">
+        sale_no = #{saleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankId != null">
+        bank_id = #{bankId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null">
+        params = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="resultStatus != null">
+        result_status = #{resultStatus,jdbcType=INTEGER},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="handleJifenOrdeStatus != null">
+        handle_jifen_orde_status = #{handleJifenOrdeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="handleJifenOrdeTime != null">
+        handle_jifen_orde_time = #{handleJifenOrdeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jifenOrderBatchNo != null">
+        jifen_order_batch_no = #{jifenOrderBatchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="ableStatus != null">
+        able_status = #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.BussJsdOrderSubmitLog">
+    update buss_jsd_order_submit_log
+    set optimistic = #{optimistic,jdbcType=INTEGER},
+      agent_no = #{agentNo,jdbcType=VARCHAR},
+      sale_no = #{saleNo,jdbcType=VARCHAR},
+      bank_id = #{bankId,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      result_status = #{resultStatus,jdbcType=INTEGER},
+      result = #{result,jdbcType=VARCHAR},
+      handle_jifen_orde_status = #{handleJifenOrdeStatus,jdbcType=VARCHAR},
+      handle_jifen_orde_time = #{handleJifenOrdeTime,jdbcType=TIMESTAMP},
+      jifen_order_batch_no = #{jifenOrderBatchNo,jdbcType=VARCHAR},
+      able_status = #{ableStatus,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findList" resultMap="BaseResultMap">
+     select <include refid="Base_Column_List"/>
+     from buss_jsd_order_submit_log
+     where 1 = 1
+     <if test="agentNo != null">
+        and agent_no = #{agentNo,jdbcType=VARCHAR}
+     </if>
+     <if test="jifenOrderBatchNo != null">
+        and jifen_order_batch_no = #{jifenOrderBatchNo,jdbcType=VARCHAR}
+     </if>
+     <if test="saleNo != null">
+        and sale_no = #{saleNo,jdbcType=VARCHAR}
+     </if>
+     <if test="bankId != null">
+        and bank_id = #{bankId,jdbcType=VARCHAR}
+     </if>
+     <if test="itemId != null">
+        and item_id = #{itemId,jdbcType=VARCHAR}
+     </if>
+     <if test="productId != null">
+        and product_id = #{productId,jdbcType=VARCHAR}
+     </if>
+     <if test="ableStatus != null">
+        and able_status = #{ableStatus,jdbcType=INTEGER}
+     </if>
+     <if test="resultStatus != null">
+        and result_status = #{resultStatus,jdbcType=INTEGER}
+     </if>
+     <if test="handleJifenOrdeStatus != null">
+        and handle_jifen_orde_status = #{handleJifenOrdeStatus,jdbcType=VARCHAR}
+     </if>
+  </select>
+</mapper>

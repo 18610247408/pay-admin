@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.BussJsdOrderMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.BussJsdOrder">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="agent_no" jdbcType="VARCHAR" property="agentNo" />
+    <result column="user_no" jdbcType="VARCHAR" property="userNo" />
+    <result column="baodan_type" jdbcType="INTEGER" property="baodanType" />
+    <result column="bank_id" jdbcType="INTEGER" property="bankId" />
+    <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
+    <result column="item_id" jdbcType="INTEGER" property="itemId" />
+    <result column="item_name" jdbcType="VARCHAR" property="itemName" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="pic_url" jdbcType="VARCHAR" property="picUrl" />
+    <result column="valid_date" jdbcType="VARCHAR" property="validDate" />
+    <result column="jsd_order_no" jdbcType="VARCHAR" property="jsdOrderNo" />
+    <result column="audit_status" jdbcType="INTEGER" property="auditStatus" />
+    <result column="audit_time" jdbcType="TIMESTAMP" property="auditTime" />
+    <result column="dui_price" jdbcType="DECIMAL" property="duiPrice" />
+    <result column="point" jdbcType="DECIMAL" property="point" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="batch_no" jdbcType="VARCHAR" property="batchNo" />
+    <result column="cost_no" jdbcType="VARCHAR" property="costNo" />
+    <result column="platform_income" jdbcType="DECIMAL" property="platformIncome" />
+    <result column="agent_income" jdbcType="DECIMAL" property="agentIncome" />
+    <result column="user_income" jdbcType="DECIMAL" property="userIncome" />
+    <result column="able_status" jdbcType="INTEGER" property="ableStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, agent_no, user_no, baodan_type, bank_id, bank_name, item_id, item_name, 
+    product_id, product_name, msg, password, pic_url, valid_date, jsd_order_no, audit_status, 
+    audit_time, dui_price, point, order_no, batch_no, cost_no, platform_income, agent_income, 
+    user_income, able_status, create_time, update_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_jsd_order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from buss_jsd_order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.BussJsdOrder">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_jsd_order (optimistic, agent_no, user_no, 
+      baodan_type, bank_id, bank_name, 
+      item_id, item_name, product_id, 
+      product_name, msg, password, 
+      pic_url, valid_date, jsd_order_no, 
+      audit_status, audit_time, dui_price, 
+      point, order_no, batch_no, 
+      cost_no, platform_income, agent_income, 
+      user_income, able_status,create_time,
+      update_time, remark)
+    values (#{optimistic,jdbcType=INTEGER}, #{agentNo,jdbcType=VARCHAR}, #{userNo,jdbcType=VARCHAR}, 
+      #{baodanType,jdbcType=INTEGER}, #{bankId,jdbcType=INTEGER}, #{bankName,jdbcType=VARCHAR}, 
+      #{itemId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER}, 
+      #{productName,jdbcType=VARCHAR}, #{msg,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{picUrl,jdbcType=VARCHAR}, #{validDate,jdbcType=VARCHAR}, #{jsdOrderNo,jdbcType=VARCHAR}, 
+      #{auditStatus,jdbcType=INTEGER}, #{auditTime,jdbcType=TIMESTAMP}, #{duiPrice,jdbcType=DECIMAL}, 
+      #{point,jdbcType=DECIMAL}, #{orderNo,jdbcType=VARCHAR}, #{batchNo,jdbcType=VARCHAR}, 
+      #{costNo,jdbcType=VARCHAR}, #{platformIncome,jdbcType=DECIMAL}, #{agentIncome,jdbcType=DECIMAL}, 
+      #{userIncome,jdbcType=DECIMAL}, #{ableStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.BussJsdOrder">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_jsd_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        optimistic,
+      </if>
+      <if test="agentNo != null">
+        agent_no,
+      </if>
+      <if test="userNo != null">
+        user_no,
+      </if>
+      <if test="baodanType != null">
+        baodan_type,
+      </if>
+      <if test="bankId != null">
+        bank_id,
+      </if>
+      <if test="bankName != null">
+        bank_name,
+      </if>
+      <if test="itemId != null">
+        item_id,
+      </if>
+      <if test="itemName != null">
+        item_name,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="msg != null">
+        msg,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="picUrl != null">
+        pic_url,
+      </if>
+      <if test="validDate != null">
+        valid_date,
+      </if>
+      <if test="jsdOrderNo != null">
+        jsd_order_no,
+      </if>
+      <if test="auditStatus != null">
+        audit_status,
+      </if>
+      <if test="auditTime != null">
+        audit_time,
+      </if>
+      <if test="duiPrice != null">
+        dui_price,
+      </if>
+      <if test="point != null">
+        point,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="batchNo != null">
+        batch_no,
+      </if>
+      <if test="costNo != null">
+        cost_no,
+      </if>
+      <if test="platformIncome != null">
+        platform_income,
+      </if>
+      <if test="agentIncome != null">
+        agent_income,
+      </if>
+      <if test="userIncome != null">
+        user_income,
+      </if>
+      <if test="ableStatus != null">
+        able_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="agentNo != null">
+        #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userNo != null">
+        #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="baodanType != null">
+        #{baodanType,jdbcType=INTEGER},
+      </if>
+      <if test="bankId != null">
+        #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="bankName != null">
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null">
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null">
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="validDate != null">
+        #{validDate,jdbcType=VARCHAR},
+      </if>
+      <if test="jsdOrderNo != null">
+        #{jsdOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="auditTime != null">
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duiPrice != null">
+        #{duiPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="point != null">
+        #{point,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null">
+        #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="costNo != null">
+        #{costNo,jdbcType=VARCHAR},
+      </if>
+      <if test="platformIncome != null">
+        #{platformIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="agentIncome != null">
+        #{agentIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="userIncome != null">
+        #{userIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="ableStatus != null">
+        #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.BussJsdOrder">
+    update buss_jsd_order
+    <set>
+      <if test="optimistic != null">
+        optimistic = #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="agentNo != null">
+        agent_no = #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userNo != null">
+        user_no = #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="baodanType != null">
+        baodan_type = #{baodanType,jdbcType=INTEGER},
+      </if>
+      <if test="bankId != null">
+        bank_id = #{bankId,jdbcType=INTEGER},
+      </if>
+      <if test="bankName != null">
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null">
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null">
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="picUrl != null">
+        pic_url = #{picUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="validDate != null">
+        valid_date = #{validDate,jdbcType=VARCHAR},
+      </if>
+      <if test="jsdOrderNo != null">
+        jsd_order_no = #{jsdOrderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null">
+        audit_status = #{auditStatus,jdbcType=INTEGER},
+      </if>
+      <if test="auditTime != null">
+        audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duiPrice != null">
+        dui_price = #{duiPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="point != null">
+        point = #{point,jdbcType=DECIMAL},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null">
+        batch_no = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="costNo != null">
+        cost_no = #{costNo,jdbcType=VARCHAR},
+      </if>
+      <if test="platformIncome != null">
+        platform_income = #{platformIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="agentIncome != null">
+        agent_income = #{agentIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="userIncome != null">
+        user_income = #{userIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="ableStatus != null">
+        able_status = #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.BussJsdOrder">
+    update buss_jsd_order
+    set optimistic = #{optimistic,jdbcType=INTEGER},
+      agent_no = #{agentNo,jdbcType=VARCHAR},
+      user_no = #{userNo,jdbcType=VARCHAR},
+      baodan_type = #{baodanType,jdbcType=INTEGER},
+      bank_id = #{bankId,jdbcType=INTEGER},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=INTEGER},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      product_id = #{productId,jdbcType=INTEGER},
+      product_name = #{productName,jdbcType=VARCHAR},
+      msg = #{msg,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      pic_url = #{picUrl,jdbcType=VARCHAR},
+      valid_date = #{validDate,jdbcType=VARCHAR},
+      jsd_order_no = #{jsdOrderNo,jdbcType=VARCHAR},
+      audit_status = #{auditStatus,jdbcType=INTEGER},
+      audit_time = #{auditTime,jdbcType=TIMESTAMP},
+      dui_price = #{duiPrice,jdbcType=DECIMAL},
+      point = #{point,jdbcType=DECIMAL},
+      order_no = #{orderNo,jdbcType=VARCHAR},
+      batch_no = #{batchNo,jdbcType=VARCHAR},
+      cost_no = #{costNo,jdbcType=VARCHAR},
+      platform_income = #{platformIncome,jdbcType=DECIMAL},
+      agent_income = #{agentIncome,jdbcType=DECIMAL},
+      user_income = #{userIncome,jdbcType=DECIMAL},
+      able_status = #{ableStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="find" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from buss_jsd_order
+    <if test="param1 != null">
+         where 1=1
+         <if test="param1.orderNo != null and param1.orderNo != ''">
+            and order_no = #{param1.orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.jsdOrderNo != null and param1.jsdOrderNo != ''">
+            and jsd_order_no = #{param1.jsdOrderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.auditStatus != null">
+            and audit_status = #{param1.auditStatus,jdbcType=INTEGER}
+        </if>
+        <if test="param1.ableStatus != null">
+            and able_status = #{param1.ableStatus,jdbcType=INTEGER}
+        </if>
+    </if>
+  </select>
+
+  <select id="findList" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from buss_jsd_order
+    <if test="param1 != null">
+        where 1 = 1
+        <if test="param1.agentNo != null and param1.agentNo != ''">
+            and agent_no = #{param1.agentNo,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.userNo != null and param1.userNo != ''">
+            and user_no = #{param1.userNo,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.jsdOrderNo != null and param1.jsdOrderNo != ''">
+            and jsd_order_no = #{param1.jsdOrderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.orderNo != null and param1.orderNo != ''">
+            and order_no = #{param1.orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.batchNo != null and param1.batchNo != ''">
+            and batch_no = #{param1.batchNo,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.baodanType != null">
+            and baodan_type = #{param1.baodanType,jdbcType=INTEGER}
+        </if>
+        <if test="param1.productId != null">
+            and product_id = #{param1.productId,jdbcType=INTEGER}
+        </if>
+        <if test="param1.productName != null and param1.productName != ''">
+            and product_name = #{param1.productName,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.itemId != null">
+            and item_id = #{param1.itemId,jdbcType=INTEGER}
+        </if>
+        <if test="param1.itemName != null and param1.itemName != ''">
+            and item_name = #{param1.itemName,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.bankId != null">
+            and bank_id = #{param1.bankId,jdbcType=INTEGER}
+        </if>
+        <if test="param1.bankName != null and param1.bankName != ''">
+            and bank_name = #{param1.bankName,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.msg != null and param1.msg != ''">
+            and msg = #{param1.msg,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.ableStatus != null">
+            and able_status = #{param1.ableStatus,jdbcType=INTEGER}
+        </if>
+        <if test="param1.auditStatus != null">
+            and audit_status = #{param1.auditStatus,jdbcType=INTEGER}
+        </if>
+        <if test="param1.createTimeFrom != null and param1.createTimeFrom != ''">
+            and create_time &gt;= #{param1.createTimeFrom,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.createTimeTo != null and param1.createTimeTo != ''">
+            and create_time &lt;= #{param1.createTimeTo,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.auditTimeFrom != null and param1.auditTimeFrom != ''">
+            and audit_time &gt;= #{param1.auditTimeFrom,jdbcType=VARCHAR}
+        </if>
+        <if test="param1.auditTimeTo != null and param1.auditTimeTo != ''">
+            and audit_time &lt;= #{param1.auditTimeTo,jdbcType=VARCHAR}
+        </if>
+    </if>
+    order by create_time desc
+  </select>
+
+  <update id="updateAbleStatusByIds">
+    update buss_jsd_order
+    set able_status = #{param2,jdbcType=INTEGER}
+    where id in
+    <if test="param1 != null and param1.size() != 0">
+        <foreach collection="param1" item="id" open="(" close=")" separator=",">
+            #{id,jdbcType=BIGINT}
+        </foreach>
+    </if>
+  </update>
+</mapper>

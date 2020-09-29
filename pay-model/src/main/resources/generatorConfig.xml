@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!--mysql 连接数据库jar 这里选择自己本地位置-->
+     <!--<classPathEntry location="/Users/shuyan.qi/Documents/mavenRepository/mysql/mysql-connector-java/5.1.9/mysql-connector-java-5.1.9.jar"/>-->
+    <classPathEntry location="/Users/jianwei.zhao/Documents/mavenRepository/mysql/mysql-connector-java/5.1.45/mysql-connector-java-5.1.45.jar"/>
+    <context id="default" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/bussplat?characterEncoding=utf8"
+                        userId="root"
+                        password="password" />
+
+        <javaModelGenerator targetPackage="com.hhm.bussplat.entity"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="com.hhm.bussplat.mapper" targetProject="src/main/resources" />
+        <javaClientGenerator targetPackage="com.hhm.bussplat.mapper"  targetProject="src/main/java" type="XMLMAPPER" />
+
+        <table tableName="agent_menu"
+               enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false"
+               selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

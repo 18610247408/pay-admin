@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.AgentOperatorMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.AgentOperator">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="max_error_times" jdbcType="INTEGER" property="maxErrorTimes" />
+    <result column="last_login_err_time" jdbcType="TIMESTAMP" property="lastLoginErrTime" />
+    <result column="modify_passwd_cycle" jdbcType="INTEGER" property="modifyPasswdCycle" />
+    <result column="passwd_modify_time" jdbcType="TIMESTAMP" property="passwdModifyTime" />
+    <result column="allow_begin_time" jdbcType="TIMESTAMP" property="allowBeginTime" />
+    <result column="allow_end_time" jdbcType="TIMESTAMP" property="allowEndTime" />
+    <result column="operator_type" jdbcType="VARCHAR" property="operatorType" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="create_operator" jdbcType="VARCHAR" property="createOperator" />
+    <result column="relogin_flag" jdbcType="VARCHAR" property="reloginFlag" />
+    <result column="passwd_expire_time" jdbcType="TIMESTAMP" property="passwdExpireTime" />
+    <result column="passwd_effect_time" jdbcType="TIMESTAMP" property="passwdEffectTime" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="agent_no" jdbcType="VARCHAR" property="agentNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, username, password, status, max_error_times, last_login_err_time, 
+    modify_passwd_cycle, passwd_modify_time, allow_begin_time, allow_end_time, operator_type, 
+    realname, create_operator, relogin_flag, passwd_expire_time, passwd_effect_time, 
+    org_code, create_time, last_update_time, agent_no
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from agent_operator
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from agent_operator
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.AgentOperator">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into agent_operator (optimistic, username, password, 
+      status, max_error_times, last_login_err_time, 
+      modify_passwd_cycle, passwd_modify_time, 
+      allow_begin_time, allow_end_time, operator_type, 
+      realname, create_operator, relogin_flag, 
+      passwd_expire_time, passwd_effect_time, 
+      org_code, create_time, last_update_time, agent_no
+      )
+    values (#{optimistic,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{maxErrorTimes,jdbcType=INTEGER}, #{lastLoginErrTime,jdbcType=TIMESTAMP}, 
+      #{modifyPasswdCycle,jdbcType=INTEGER}, #{passwdModifyTime,jdbcType=TIMESTAMP}, 
+      #{allowBeginTime,jdbcType=TIMESTAMP}, #{allowEndTime,jdbcType=TIMESTAMP}, #{operatorType,jdbcType=VARCHAR}, 
+      #{realname,jdbcType=VARCHAR}, #{createOperator,jdbcType=VARCHAR}, #{reloginFlag,jdbcType=VARCHAR}, 
+      #{passwdExpireTime,jdbcType=TIMESTAMP}, #{passwdEffectTime,jdbcType=TIMESTAMP}, 
+      #{orgCode,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lastUpdateTime,jdbcType=TIMESTAMP},
+      #{agentNo,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.AgentOperator">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into agent_operator
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        optimistic,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="maxErrorTimes != null">
+        max_error_times,
+      </if>
+      <if test="lastLoginErrTime != null">
+        last_login_err_time,
+      </if>
+      <if test="modifyPasswdCycle != null">
+        modify_passwd_cycle,
+      </if>
+      <if test="passwdModifyTime != null">
+        passwd_modify_time,
+      </if>
+      <if test="allowBeginTime != null">
+        allow_begin_time,
+      </if>
+      <if test="allowEndTime != null">
+        allow_end_time,
+      </if>
+      <if test="operatorType != null">
+        operator_type,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="createOperator != null">
+        create_operator,
+      </if>
+      <if test="reloginFlag != null">
+        relogin_flag,
+      </if>
+      <if test="passwdExpireTime != null">
+        passwd_expire_time,
+      </if>
+      <if test="passwdEffectTime != null">
+        passwd_effect_time,
+      </if>
+      <if test="orgCode != null">
+        org_code,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+      <if test="agentNo != null">
+        agent_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="maxErrorTimes != null">
+        #{maxErrorTimes,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginErrTime != null">
+        #{lastLoginErrTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyPasswdCycle != null">
+        #{modifyPasswdCycle,jdbcType=INTEGER},
+      </if>
+      <if test="passwdModifyTime != null">
+        #{passwdModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="allowBeginTime != null">
+        #{allowBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="allowEndTime != null">
+        #{allowEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorType != null">
+        #{operatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperator != null">
+        #{createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="reloginFlag != null">
+        #{reloginFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="passwdExpireTime != null">
+        #{passwdExpireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passwdEffectTime != null">
+        #{passwdEffectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agentNo != null">
+         #{agentNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.AgentOperator">
+    update agent_operator
+    <set>
+      <if test="optimistic != null">
+        optimistic = #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="maxErrorTimes != null">
+        max_error_times = #{maxErrorTimes,jdbcType=INTEGER},
+      </if>
+      <if test="lastLoginErrTime != null">
+        last_login_err_time = #{lastLoginErrTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyPasswdCycle != null">
+        modify_passwd_cycle = #{modifyPasswdCycle,jdbcType=INTEGER},
+      </if>
+      <if test="passwdModifyTime != null">
+        passwd_modify_time = #{passwdModifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="allowBeginTime != null">
+        allow_begin_time = #{allowBeginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="allowEndTime != null">
+        allow_end_time = #{allowEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operatorType != null">
+        operator_type = #{operatorType,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="createOperator != null">
+        create_operator = #{createOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="reloginFlag != null">
+        relogin_flag = #{reloginFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="passwdExpireTime != null">
+        passwd_expire_time = #{passwdExpireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="passwdEffectTime != null">
+        passwd_effect_time = #{passwdEffectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orgCode != null">
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="agentNo != null">
+         agent_no = #{agentNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.AgentOperator">
+    update agent_operator
+    set optimistic = #{optimistic,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      max_error_times = #{maxErrorTimes,jdbcType=INTEGER},
+      last_login_err_time = #{lastLoginErrTime,jdbcType=TIMESTAMP},
+      modify_passwd_cycle = #{modifyPasswdCycle,jdbcType=INTEGER},
+      passwd_modify_time = #{passwdModifyTime,jdbcType=TIMESTAMP},
+      allow_begin_time = #{allowBeginTime,jdbcType=TIMESTAMP},
+      allow_end_time = #{allowEndTime,jdbcType=TIMESTAMP},
+      operator_type = #{operatorType,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      create_operator = #{createOperator,jdbcType=VARCHAR},
+      relogin_flag = #{reloginFlag,jdbcType=VARCHAR},
+      passwd_expire_time = #{passwdExpireTime,jdbcType=TIMESTAMP},
+      passwd_effect_time = #{passwdEffectTime,jdbcType=TIMESTAMP},
+      org_code = #{orgCode,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      agent_no = #{agentNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="findAllOfPage" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM agent_operator
+    WHERE 1 = 1
+    <if test="query.username != null and query.username != ''">
+      AND username = #{query.username}
+    </if>
+    <if test="query.realname != null and query.realname != ''">
+      AND realname = #{query.realname}
+    </if>
+    ORDER BY create_time DESC
+  </select>
+
+  <select id="findOperatorByRealName" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" />
+    FROM agent_operator
+    WHERE realname = #{realname,jdbcType=VARCHAR}
+    AND status = #{status,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findOperator" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/>
+    FROM agent_operator
+    WHERE username = #{username,jdbcType=VARCHAR}
+    AND status = #{status,jdbcType=VARCHAR}
+  </select>
+</mapper>

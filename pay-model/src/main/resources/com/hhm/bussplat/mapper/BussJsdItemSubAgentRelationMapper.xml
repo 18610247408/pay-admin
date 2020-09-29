@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hhm.bussplat.mapper.BussJsdItemSubAgentRelationMapper">
+  <resultMap id="BaseResultMap" type="com.hhm.bussplat.entity.BussJsdItemSubAgentRelation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="agent_no" jdbcType="VARCHAR" property="agentNo" />
+    <result column="productid" jdbcType="VARCHAR" property="productid" />
+    <result column="able_status" jdbcType="INTEGER" property="ableStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, optimistic, agent_no, productid, able_status, create_time, update_time, remark
+  </sql>
+
+  <resultMap id="JoinResultMap" type="com.hhm.bussplat.entity.BussJsdItemSubAgentRelation">
+    <id column="buss_jsd_item_sub_agent_relation_id" jdbcType="INTEGER" property="id" />
+    <result column="buss_jsd_item_sub_agent_relation_optimistic" jdbcType="INTEGER" property="optimistic" />
+    <result column="buss_jsd_item_sub_agent_relation_agent_no" jdbcType="VARCHAR" property="agentNo" />
+    <result column="buss_jsd_item_sub_agent_relation_productid" jdbcType="VARCHAR" property="productid" />
+    <result column="buss_jsd_item_sub_agent_relation_able_status" jdbcType="INTEGER" property="ableStatus" />
+    <result column="buss_jsd_item_sub_agent_relation_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="buss_jsd_item_sub_agent_relation_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="buss_jsd_item_sub_agent_relation_remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+
+  <sql id="Join_Column_List">
+    ${tableName}.id `buss_jsd_item_sub_agent_relation_id`,
+    ${tableName}.optimistic `buss_jsd_item_sub_agent_relation_optimistic`,
+    ${tableName}.agent_no `buss_jsd_item_sub_agent_relation_agent_no`,
+    ${tableName}.productid `buss_jsd_item_sub_agent_relation_productid`,
+    ${tableName}.able_status `buss_jsd_item_sub_agent_relation_able_status`,
+    ${tableName}.create_time `buss_jsd_item_sub_agent_relation_create_time`,
+    ${tableName}.update_time `buss_jsd_item_sub_agent_relation_update_time`,
+    ${tableName}.remark `buss_jsd_item_sub_agent_relation_remark`
+    ${end}
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from buss_jsd_item_sub_agent_relation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from buss_jsd_item_sub_agent_relation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hhm.bussplat.entity.BussJsdItemSubAgentRelation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_jsd_item_sub_agent_relation (optimistic, agent_no, productid, 
+      able_status, create_time, update_time, 
+      remark)
+    values (#{optimistic,jdbcType=INTEGER}, #{agentNo,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR}, 
+      #{ableStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hhm.bussplat.entity.BussJsdItemSubAgentRelation">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into buss_jsd_item_sub_agent_relation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        optimistic,
+      </if>
+      <if test="agentNo != null">
+        agent_no,
+      </if>
+      <if test="productid != null">
+        productid,
+      </if>
+      <if test="ableStatus != null">
+        able_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="optimistic != null">
+        #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="agentNo != null">
+        #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null">
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="ableStatus != null">
+        #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hhm.bussplat.entity.BussJsdItemSubAgentRelation">
+    update buss_jsd_item_sub_agent_relation
+    <set>
+      <if test="optimistic != null">
+        optimistic = #{optimistic,jdbcType=INTEGER},
+      </if>
+      <if test="agentNo != null">
+        agent_no = #{agentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null">
+        productid = #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="ableStatus != null">
+        able_status = #{ableStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hhm.bussplat.entity.BussJsdItemSubAgentRelation">
+    update buss_jsd_item_sub_agent_relation
+    set optimistic = #{optimistic,jdbcType=INTEGER},
+      agent_no = #{agentNo,jdbcType=VARCHAR},
+      productid = #{productid,jdbcType=VARCHAR},
+      able_status = #{ableStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="enableItemSubAgentRelations" resultMap="JoinResultMap">
+    select
+    <include refid="Join_Column_List">
+        <property name="tableName" value="b"/>
+        <property name="end" value=""/>
+    </include>
+    from buss_jsd_item_sub_manager a
+    inner join buss_jsd_item_sub_agent_relation b
+    on a.productid = b.productid
+    where a.able_status = #{managerAbleStatus,jdbcType=INTEGER}
+    and b.agent_no = #{query.agentNo,jdbcType=VARCHAR}
+    and b.able_status = #{query.ableStatus,jdbcType=INTEGER}
+  </select>
+
+  <select id="enableItemSubAgentRelation" resultMap="JoinResultMap">
+    select
+    <include refid="Join_Column_List">
+        <property name="tableName" value="b"/>
+        <property name="end" value=""/>
+    </include>
+    from buss_jsd_item_sub_manager a
+    inner join buss_jsd_item_sub_agent_relation b
+    on a.productid = b.productid
+    where a.able_status = #{managerAbleStatus,jdbcType=INTEGER}
+    and b.agent_no = #{query.agentNo,jdbcType=VARCHAR}
+    and b.productid = #{query.productid,jdbcType=VARCHAR}
+    and b.able_status = #{query.ableStatus,jdbcType=INTEGER}
+  </select>
+</mapper>
